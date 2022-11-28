@@ -19,15 +19,15 @@ export const tasksReducer = (state: TaskType[], action: TsarType) => {
 }
 
 type TsarType = RemoveTaskACType | addTaskACType
+
 export type RemoveTaskACType = ReturnType<typeof removeTaskAC>
-
-
 export const removeTaskAC = (id: string) => {
     return {
         type: 'REMOVE-TASK',
         payload: {id}
     } as const
 }
+
 export type addTaskACType = ReturnType<typeof addTaskAC>
 export const addTaskAC = (title: string) => {
     return {
