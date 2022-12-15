@@ -1,12 +1,14 @@
 import React from "react";
 import {TaskType} from "../Todolist";
 import {v1} from "uuid";
-import {TasksStateType} from "../App";
-import {addTodolistACType} from "./todoLists-reducer";
+import {TasksStateType, TodolistType} from "../App";
+import {addTodolistACType} from "./todolists-reducer";
 
-export const tasksReducer = (state: TasksStateType, action: TsarType): TasksStateType => {
+const initialState: TasksStateType = {} as TasksStateType
+export const tasksReducer = (state = initialState, action: TsarType): TasksStateType => {
     switch (action.type) {
         case'REMOVE-TASK': {
+
             return {
                 ...state,
                 [action.payload.idTodolist]: state[action.payload.idTodolist].filter(el => el.id !== action.payload.idTask)
@@ -17,6 +19,14 @@ export const tasksReducer = (state: TasksStateType, action: TsarType): TasksStat
             return {...state, [action.payload.idTodolist]: [newTask, ...state[action.payload.idTodolist]]}
         }
         case "CHANGE-TASK-STATUS": {
+
+            // return {
+            //     ...state,
+            //     [action.payload.todolistId]: state[action.payload.todolistId].map(el => el.id === action.payload.taskId ? {
+            //         ...el,
+            //         isDone: action.payload.isDone
+            //     } : el)
+            // }
             return {
                 ...state,
                 [action.payload.todolistId]: state[action.payload.todolistId].map(el => el.id === action.payload.taskId ? {
@@ -44,17 +54,6 @@ export const tasksReducer = (state: TasksStateType, action: TsarType): TasksStat
 }
 
 type TsarType = RemoveTaskACType | addTaskACType | changeTaskStatusACType | changeTaskTitleACType | addTodolistACType
-
-
-// export const addTodolistAC = (title: string, newId: string) => {
-//     return {
-//         type: 'ADD-TODOLIST',
-//         payload: {
-//             title,
-//             newId
-//         }
-//     } as const
-// }
 
 export type RemoveTaskACType = ReturnType<typeof removeTaskAC>
 export const removeTaskAC = (idTask: string, idTodolist: string) => {

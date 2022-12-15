@@ -25,7 +25,7 @@ export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
 
-function App() {
+function AppWithReducer() {
     let todolistId1 = v1();
     let todolistId2 = v1();
     const [todolists, dispatchTodolists] = useReducer(todolistsReducer, [
@@ -121,9 +121,9 @@ function App() {
         //     ...tasks,
         //     [newTodolistId]: []
         // })
-
-        dispatchTodolists(addTodolistAC(title))
-        dispatchTasks(addTodolistAC(title))
+        const action = addTodolistAC(title)
+        dispatchTodolists(action)
+        dispatchTasks(action)
     }
 
 
@@ -182,4 +182,4 @@ function App() {
     );
 }
 
-export default App;
+export default AppWithReducer;
