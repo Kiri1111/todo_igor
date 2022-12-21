@@ -1,4 +1,4 @@
-import React, {useReducer, useState} from 'react';
+import React, {useCallback, useReducer, useState} from 'react';
 import './App.css';
 import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
@@ -31,10 +31,10 @@ export type TasksStateType = {
 function AppWithRedux() {
     const todolists = useSelector<AppRootStateType, Array<TodolistType>>((st) => st.todolist)
     const dispatch = useDispatch()
-    
-    function addTodolist(title: string) {
+
+    const addTodolist = useCallback((title: string) => {
         dispatch(addTodolistAC(title))
-    }
+    }, [dispatch])
 
     return (
         <div className="App">
