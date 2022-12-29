@@ -10,6 +10,7 @@ type TaskPropsType = {
     removeTask: (taskId: string) => void
     ChangeTaskStatus: (taskId: string, newIsDone: boolean) => void
     changeTaskTitle: (taskId: string, newValue: string) => void
+
 }
 export const Task = (props: TaskPropsType) => {
     const removeTask = () => {
